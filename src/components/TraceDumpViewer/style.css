@@ -1,0 +1,21 @@
+.trace-file-info {
+	height: 2vh;
+}
+
+.trace-view-settings {
+	display: flex;
+	flex-direction: row;
+	height: 2vh;
+	box-sizing: border-box;
+	padding-left: 5px;
+}
+
+.trace-dump-details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	height: 86vh;
+	box-sizing: border-box;
+}

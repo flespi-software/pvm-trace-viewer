@@ -1,0 +1,41 @@
+.trace-step {
+	width: 100%;
+	border: 1px solid black;
+	padding: 5px;
+	margin-bottom: 3px;
+	box-sizing: border-box;
+}
+
+.trace-step:hover {
+	border: 3px solid green;
+	padding: 3px;
+}
+
+.trace-step-selected {
+	border: 3px solid black;
+	padding: 3px;
+}
+
+.trace-var {
+	margin-right: 5px;
+}
+
+.trace-step-error {
+	overflow: auto;
+}
+
+.trace-step-data {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.trace-step-data-column {
+	display: flex;
+}
+
+.trace-step-source-line {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}

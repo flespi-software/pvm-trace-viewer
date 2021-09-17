@@ -1,0 +1,11 @@
+.trace-packet-part {
+	cursor: pointer;
+}
+
+.trace-packet-part:hover {
+	background-color: lightblue;
+}
+
+.trace-packet-part-selected {
+	background-color: lightblue;
+}

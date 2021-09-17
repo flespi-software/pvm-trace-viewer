@@ -1,0 +1,10 @@
+.trace-dump-steps {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 5px;
+	overflow-y: auto;
+	height: 100%;
+	width: 50vw;
+	box-sizing: border-box;
+}

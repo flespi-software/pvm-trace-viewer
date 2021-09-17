@@ -1,0 +1,19 @@
+.source-code-lines {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	width: 50vw;
+	height: 86vh;
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+.source-code-line {
+	display: flex;
+	margin: 0;
+	tab-size: 4;
+}
+
+.source-code-line-selected {
+	background-color: lightblue;
+}

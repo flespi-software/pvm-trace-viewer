@@ -1,0 +1,9 @@
+.App {
+	display: flex;
+	flex-direction: column;
+	font-family: monospace;
+}
+
+.flex {
+	display: flex;
+}
