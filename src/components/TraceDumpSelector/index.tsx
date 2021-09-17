@@ -13,7 +13,7 @@ const TraceDumpSelector: React.FC<TraceDumpSelectorProps> = (props) => {
 		if (e.target.files) {
 			const fileReader = new FileReader();
 			const file = e.target.files[0];
-			fileReader.readAsText(file, "UTF-8");
+			fileReader.readAsText(file, 'UTF-8');
 			props.setTraceFile({ name: file.name, size: file.size });
 			fileReader.onload = (e) => {
 				if (e.target?.result) {
@@ -21,7 +21,7 @@ const TraceDumpSelector: React.FC<TraceDumpSelectorProps> = (props) => {
 					const traceDump: TTraceDump = JSON.parse(fileJson);
 					if (traceDump.source) {
 						traceDump.sourceLines = {};
-						for (var key in traceDump.source) {
+						for (let key of Object.keys(traceDump.source)) {
 							const lines = traceDump.source[key].split('\n');
 							traceDump.sourceLines[key] = lines;
 						}

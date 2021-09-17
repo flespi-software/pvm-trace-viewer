@@ -39,7 +39,7 @@ const TracePacket: React.FC<TracePacketProps> = (props) => {
 		if (prev === -1)
 			prev = prevPacketIndex(trace, trace.length);
 		setPacketIndex(prev);
-	}
+	};
 
 	const goNextPacket = () => {
 		let next = nextPacketIndex(trace, packetIndex);

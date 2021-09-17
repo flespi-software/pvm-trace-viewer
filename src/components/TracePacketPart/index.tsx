@@ -16,14 +16,16 @@ const TracePacketPart: React.FC<TracePacketPartProps> = (props) => {
 
 	const showStep = (index: number) => {
 		setStepIndex(index);
-	}
+	};
 
-	return <span
+	return (
+		<span
 			ref={index === stepIndex ? scrollTo : undefined}
 			className={index === stepIndex ? 'trace-packet-part trace-packet-part-selected' : 'trace-packet-part'}
 			onClick={() => showStep(index)}>
-		{packet.d.slice(step.l * 2, step.o * 2)}
-	</span>;
+			{packet.d.slice(step.l * 2, step.o * 2)}
+		</span>
+	);
 };
 
 export default TracePacketPart;

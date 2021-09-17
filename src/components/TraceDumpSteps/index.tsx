@@ -31,7 +31,7 @@ const TraceDumpSteps: React.FC<TraceDumpStepsProps> = (props) => {
 		<div className="trace-dump-steps">
 			{steps}
 		</div>
-	)
+	);
 };
 
 export default TraceDumpSteps;
