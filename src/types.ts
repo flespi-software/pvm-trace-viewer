@@ -4,10 +4,10 @@ export interface TTraceFile {
 }
 
 export enum TTraceStepType {
-	Line = "l",									// new line of source code
-	NewData = "n",								// new input data received
-	Offset = "o",								// parsed part of the input data
-	Error = "e",								// error occured
+	Line = 'l',									// new line of source code
+	NewData = 'n',								// new input data received
+	Offset = 'o',								// parsed part of the input data
+	Error = 'e',								// error occured
 }
 
 export type TCodeLocation =

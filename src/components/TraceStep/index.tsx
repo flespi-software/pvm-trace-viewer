@@ -1,7 +1,7 @@
 import React from 'react';
 import { getDataSize, TTraceDump, TTraceStep, TTraceStepNewData, TTraceStepType, TVariableAction } from '../../types';
 import TimeString from '../TimeString';
-import { scrollTo } from '../../lib/common';
+import { getSourceCodeLine, scrollTo } from '../../lib/common';
 import './style.css';
 
 interface TraceStepProps {
@@ -19,38 +19,17 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 
 	const getVarName = (index: number) => {
 		const v = variables.find((varId) => varId[0] === index);
-		return v ? v[1] : "?";
-	}
+		return v ? v[1] : '?';
+	};
 
 	const listVars = (vars: TVariableAction[]) => {
 		return vars.map((v, index) => {
-			if (typeof v === "number")
+			if (typeof v === 'number')
 				return <span key={index} className="trace-var">UNSET ${getVarName(v)}</span>;
 			else
-				return <span key={index} className="trace-var">${getVarName(v[0])} = {v[2]}</span>
-		})
-	}
-
-	const fileIndexToSourceName = (file: number): string | null => {
-		const fileId = traceDump.files.find((fId) => fId[0] === file);
-		if (!fileId)
-			return null;
-		const fileName = fileId[1];
-		if (fileName === traceDump.bytecode_name)
-			return 'main';
-		return fileName;
-	}
-
-	const displaySourceCodeLine = (file: number, lineNum: number) => {
-		if (!traceDump.sourceLines)
-			return '?';
-		const sourceName = fileIndexToSourceName(file);
-		if (!sourceName)
-			return '?';
-		const lines = traceDump.sourceLines[sourceName];
-		const line = lines[lineNum - 1];
-		return line.trim();
-	}
+				return <span key={index} className="trace-var">${getVarName(v[0])} = {v[2]}</span>;
+		});
+	};
 
 	const stepClick = (index: number) => {
 		setStepIndex(index);
@@ -65,38 +44,39 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 				{listVars(step.v)}
 			</div>
 			<div className="trace-step-source-line">
-				{displaySourceCodeLine(step.c[0], step.c[1])}
+				{getSourceCodeLine(traceDump, step.c[0], step.c[1])}
 			</div>
-		</div>
+		</div>;
 		break;
-	case TTraceStepType.NewData:
+	case TTraceStepType.NewData: {
 		const size = getDataSize(step);
 		body = <div>
 			<div className="trace-step-data">
 				<div className="trace-step-data-column">
-					{size > 20 ? step.d.slice(0, 40) + "..." : step.d}
+					<strong>{size > 20 ? step.d.slice(0, 40) + '...' : step.d}</strong>
 				</div>
 				<div className="trace-step-data-column">
-					{size} bytes,&nbsp;<TimeString value={step.tm} />
+					<small>{size} bytes,&nbsp;<TimeString value={step.tm} /></small>
 				</div>
 			</div>
 			<div className="trace-step-source-line">
-				{displaySourceCodeLine(step.c[0], step.c[1])}
+				{getSourceCodeLine(traceDump, step.c[0], step.c[1])}
 			</div>
 		</div>;
 		break;
+	}
 	case TTraceStepType.Offset:
 		body = <div>
 			<div className="trace-step-data">
 				<div className="trace-step-data-column">
-					{packetStep && <span>&nbsp;&nbsp;{ packetStep.d.slice(step.l * 2, step.o * 2) }</span>}
+					<strong>{packetStep && <span>&nbsp;&nbsp;{ packetStep.d.slice(step.l * 2, step.o * 2) }</span>}</strong>
 				</div>
 				<div className="trace-step-data-column">
-					{step.o - step.l} bytes: {step.l}...{step.o}
+					<small>{step.o - step.l} bytes: {step.l}...{step.o}</small>
 				</div>
 			</div>
 			<div className="trace-step-source-line">
-				{displaySourceCodeLine(step.c[0], step.c[1])}
+				{getSourceCodeLine(traceDump, step.c[0], step.c[1])}
 			</div>
 		</div>;
 		break;
@@ -105,7 +85,7 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 			Error:
 			<pre className="trace-step-error">{step.m}</pre>
 			<div className="trace-step-source-line">
-				{displaySourceCodeLine(step.c[0], step.c[1])}
+				{getSourceCodeLine(traceDump, step.c[0], step.c[1])}
 			</div>
 		</div>;
 		break;
@@ -115,7 +95,7 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 		<div
 			key={index}
 			ref={index === stepIndex ? scrollTo : undefined}
-			className={index === stepIndex ? "trace-step trace-step-selected" : "trace-step"}
+			className={index === stepIndex ? 'trace-step trace-step-selected' : 'trace-step'}
 			onClick={() => stepClick(index)}>
 			{body}
 		</div>

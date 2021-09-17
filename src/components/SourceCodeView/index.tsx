@@ -17,7 +17,7 @@ const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 		return <div>no source code available</div>;
 
 	const lines = fileLines.map((line, index) => {
-		let viewLine
+		let viewLine;
 		if (line === '')
 			viewLine = <br />;
 		else
@@ -26,12 +26,12 @@ const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 		return <pre
 			key={index}
 			ref={index === (step.c[1] - 1) ? scrollTo : undefined}
-			className={index === (step.c[1] - 1) ? 'source-code-line source-code-line-selected': 'source-code-line'}>{viewLine}</pre>
+			className={index === (step.c[1] - 1) ? 'source-code-line source-code-line-selected': 'source-code-line'}>{viewLine}</pre>;
 	});
 
 	return <div className="source-code-lines">
 		{lines}
-	</div>
+	</div>;
 };
 
 export default SourceCodeView;
