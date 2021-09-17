@@ -141,6 +141,9 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 					const spaces = maxSize - hex.length;
 					lines.push(`${hex}${' '.repeat(spaces)}\t\t${getSourceCodeLine(traceDump, step.c[0], step.c[1])}`);
 				}
+			} else if (step.t === TTraceStepType.Error) {
+				lines.push('');
+				lines.push(step.m);
 			}
 		}
 
