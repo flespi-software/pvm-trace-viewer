@@ -18,6 +18,7 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 	const [packetIndex, setPacketIndex] = useState(-1);
 	const [stepIndex, setStepIndex] = useState(0);
 	const [showAllSteps, setShowAllSteps] = useState(false);
+	const [decodeHex, setDecodeHex] = useState(false);
 
 	const setPacket = (index: number) => {
 		setPacketIndex(index);
@@ -38,6 +39,10 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 
 	const showAllStepsChanged = (e: ChangeEvent<HTMLInputElement>) => {
 		setShowAllSteps(e.target.checked);
+	};
+
+	const decodeHexChanged = (e: ChangeEvent<HTMLInputElement>) => {
+		setDecodeHex(e.target.checked);
 	};
 
 	const prevStep = (index: number) => {
@@ -160,14 +165,16 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 				<button onClick={() => setStep(prevStep(stepIndex))}>&lt;</button>
 				<button onClick={() => setStep(nextStep(stepIndex))}>&gt;</button>
 				&nbsp;
-				<label>show all steps: <input type="checkbox" onChange={showAllStepsChanged} /></label>
+				<label><input type="checkbox" onChange={showAllStepsChanged} /> show all steps</label>
+				&nbsp;|&nbsp;
+				<label><input type="checkbox" onChange={decodeHexChanged} /> decode hex</label>
 				&nbsp;
 				<button onClick={doExportCSV}>Export to CSV</button>
 				&nbsp;
 				<button onClick={doExportTXT}>Export to TXT</button>
 			</div>
 			<div className="trace-dump-details">
-				<TraceDumpSteps traceDump={traceDump} stepIndex={stepIndex} setStepIndex={setStep} showAllSteps={showAllSteps} />
+				<TraceDumpSteps traceDump={traceDump} stepIndex={stepIndex} setStepIndex={setStep} showAllSteps={showAllSteps} decodeHex={decodeHex} />
 				<SourceCodeView traceDump={traceDump} stepIndex={stepIndex} />
 			</div>
 		</>

@@ -8,11 +8,12 @@ interface TraceDumpStepsProps {
 	stepIndex: number;
 	setStepIndex: (index: number) => void;
 	showAllSteps: boolean;
+	decodeHex: boolean;
 }
 
 const TraceDumpSteps: React.FC<TraceDumpStepsProps> = (props) => {
 	const { trace } = props.traceDump;
-	const { stepIndex, setStepIndex, showAllSteps } = props;
+	const { stepIndex, setStepIndex, showAllSteps, decodeHex } = props;
 
 	const step = trace[stepIndex] as TTraceStep;
 	console.log('step', step);
@@ -24,7 +25,7 @@ const TraceDumpSteps: React.FC<TraceDumpStepsProps> = (props) => {
 		if (step.t === TTraceStepType.NewData)
 			packetStep = step;
 		if (showAllSteps || (step.t !== TTraceStepType.Line))
-			steps.push(<TraceStep key={index} traceDump={props.traceDump} stepIndex={stepIndex} index={index} packetStep={packetStep} setStepIndex={setStepIndex} step={step} />);
+			steps.push(<TraceStep key={index} traceDump={props.traceDump} stepIndex={stepIndex} index={index} packetStep={packetStep} setStepIndex={setStepIndex} step={step} decodeHex={decodeHex} />);
 	});
 
 	return (
