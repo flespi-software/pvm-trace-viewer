@@ -4,6 +4,35 @@ import TimeString from '../TimeString';
 import { getSourceCodeLine, scrollTo } from '../../lib/common';
 import './style.css';
 
+const displayDecodedHex = (hex: string) => {
+	const bytes: number[] = [];
+
+	let i = 0;
+	while (i < hex.length) {
+		const hexByte = hex.slice(i, i+2);
+		bytes.push(Number.parseInt(hexByte, 16));
+		i += 2;
+	}
+
+	const chars = bytes.map((byte) => {
+		if (byte === 9) {
+			return <span className='special-data-char'>\t</span>;
+		} else if (byte === 10) {
+			return <span className='special-data-char'>\n</span>;
+		} else if (byte === 13) {
+			return <span className='special-data-char'>\r</span>;
+		} else if (byte < 0x20) {
+			let char = byte.toString(16).toUpperCase();
+			if (char.length < 2)
+				char = `0${char}`;
+			return <span className='special-data-char'>\x{char}</span>;
+		} else {
+			return String.fromCharCode(byte);
+		}
+	});
+	return chars;
+};
+
 interface TraceStepProps {
 	traceDump: TTraceDump;
 	stepIndex: number;
@@ -11,10 +40,11 @@ interface TraceStepProps {
 	packetStep?: TTraceStepNewData;
 	setStepIndex: (index: number) => void;
 	step: TTraceStep;
+	decodeHex: boolean;
 }
 
 const TraceStep: React.FC<TraceStepProps> = (props) => {
-	const { traceDump, stepIndex, index, packetStep, setStepIndex, step } = props;
+	const { traceDump, stepIndex, index, packetStep, setStepIndex, step, decodeHex } = props;
 	const { variables } = traceDump;
 
 	const getVarName = (index: number) => {
@@ -52,12 +82,12 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 		const size = getDataSize(step);
 		body = <div>
 			<div className="trace-step-data">
-				<div className="trace-step-data-column">
-					<strong>{size > 20 ? step.d.slice(0, 40) + '...' : step.d}</strong>
-				</div>
-				<div className="trace-step-data-column">
+				<span className="trace-step-data-column trace-step-data-column-value">
+					{decodeHex ? displayDecodedHex(step.d) : step.d}
+				</span>
+				<span className="trace-step-data-column">
 					<small>{size} bytes,&nbsp;<TimeString value={step.tm} /></small>
-				</div>
+				</span>
 			</div>
 			<div className="trace-step-source-line">
 				{getSourceCodeLine(traceDump, step.c[0], step.c[1])}
@@ -68,12 +98,14 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 	case TTraceStepType.Offset:
 		body = <div>
 			<div className="trace-step-data">
-				<div className="trace-step-data-column">
-					<strong>{packetStep && <span>&nbsp;&nbsp;{ packetStep.d.slice(step.l * 2, step.o * 2) }</span>}</strong>
-				</div>
-				<div className="trace-step-data-column">
+				<span className="trace-step-data-column trace-step-data-column-value">
+					{packetStep && <>&nbsp;&nbsp;{
+						decodeHex ? displayDecodedHex(packetStep.d.slice(step.l * 2, step.o * 2)) : packetStep.d.slice(step.l * 2, step.o * 2)
+					}</>}
+				</span>
+				<span className="trace-step-data-column">
 					<small>{step.o - step.l} bytes: {step.l}...{step.o}</small>
-				</div>
+				</span>
 			</div>
 			<div className="trace-step-source-line">
 				{getSourceCodeLine(traceDump, step.c[0], step.c[1])}
