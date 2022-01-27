@@ -11,6 +11,7 @@ interface TracePacketProps {
 	setPacketIndex: (index: number) => void;
 	stepIndex: number;
 	setStepIndex: (index: number) => void;
+	decodeHex: boolean;
 }
 
 const prevPacketIndex = (trace: TTraceStep[], fromIndex: number) => findLastIndex(trace, (step) => step.t === TTraceStepType.NewData, fromIndex - 1);
@@ -19,7 +20,7 @@ const nextPacketIndex = (trace: TTraceStep[], fromIndex: number) => findIndex(tr
 
 const TracePacket: React.FC<TracePacketProps> = (props) => {
 	const { trace } = props.traceDump;
-	const { packetIndex, setPacketIndex, stepIndex, setStepIndex } = props;
+	const { packetIndex, setPacketIndex, stepIndex, setStepIndex, decodeHex } = props;
 
 	const packet = trace[packetIndex] as TTraceStepNewData;
 
@@ -54,7 +55,7 @@ const TracePacket: React.FC<TracePacketProps> = (props) => {
 	let step = trace[i];
 	while (step && step.t !== TTraceStepType.NewData) {
 		if (step.t === TTraceStepType.Offset)
-			packetParts.push(<TracePacketPart key={i} packet={packet} step={step} index={i} stepIndex={stepIndex} setStepIndex={setStepIndex} />);
+			packetParts.push(<TracePacketPart key={i} packet={packet} step={step} index={i} stepIndex={stepIndex} setStepIndex={setStepIndex} decodeHex={decodeHex} />);
 		i += 1;
 		step = trace[i];
 	}

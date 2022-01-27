@@ -160,7 +160,7 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 			<div className="trace-file-info">
 				Loaded trace dump file <strong>{traceFile.name}</strong> of size <strong>{Number(traceFile.size / 1024).toFixed(2)}</strong> KiB
 			</div>
-			<TracePacket traceDump={traceDump} packetIndex={packetIndex} setPacketIndex={setPacket} stepIndex={stepIndex} setStepIndex={setStep} />
+			<TracePacket traceDump={traceDump} packetIndex={packetIndex} setPacketIndex={setPacket} stepIndex={stepIndex} setStepIndex={setStep} decodeHex={decodeHex} />
 			<div className="trace-view-settings">
 				<button onClick={() => setStep(prevStep(stepIndex))}>&lt;</button>
 				<button onClick={() => setStep(nextStep(stepIndex))}>&gt;</button>
