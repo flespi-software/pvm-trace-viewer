@@ -34,7 +34,9 @@ const TraceDumpSelector: React.FC<TraceDumpSelectorProps> = (props) => {
 
 	return (
 		<header className="trace-dump-header">
-			Load trace dump:
+			<span>
+				Load trace dump: (here is a <a href='/pvm-trace-viewer/demo.json' download={true}>demo.json</a>)
+			</span>
 			<input type="file" onChange={handleChange}/>
 		</header>
 	);
