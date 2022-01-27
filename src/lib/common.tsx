@@ -25,3 +25,32 @@ export const getSourceCodeLine = (traceDump: TTraceDump, file: number, lineNum: 
 	const line = lines[lineNum - 1];
 	return line.trim();
 };
+
+export const renderDecodedHex = (hex: string) => {
+	const bytes: number[] = [];
+
+	let i = 0;
+	while (i < hex.length) {
+		const hexByte = hex.slice(i, i + 2);
+		bytes.push(Number.parseInt(hexByte, 16));
+		i += 2;
+	}
+
+	const chars = bytes.map((byte) => {
+		if (byte === 9) {
+			return <span className='special-data-char'>\t</span>;
+		} else if (byte === 10) {
+			return <span className='special-data-char'>\n</span>;
+		} else if (byte === 13) {
+			return <span className='special-data-char'>\r</span>;
+		} else if (byte < 0x20) {
+			let char = byte.toString(16).toUpperCase();
+			if (char.length < 2)
+				char = `0${char}`;
+			return <span className='special-data-char'>\x{char}</span>;
+		} else {
+			return String.fromCharCode(byte);
+		}
+	});
+	return chars;
+};

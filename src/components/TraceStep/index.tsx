@@ -1,37 +1,8 @@
 import React from 'react';
 import { getDataSize, TTraceDump, TTraceStep, TTraceStepNewData, TTraceStepType, TVariableAction } from '../../types';
 import TimeString from '../TimeString';
-import { getSourceCodeLine, scrollTo } from '../../lib/common';
+import { getSourceCodeLine, renderDecodedHex, scrollTo } from '../../lib/common';
 import './style.css';
-
-const displayDecodedHex = (hex: string) => {
-	const bytes: number[] = [];
-
-	let i = 0;
-	while (i < hex.length) {
-		const hexByte = hex.slice(i, i+2);
-		bytes.push(Number.parseInt(hexByte, 16));
-		i += 2;
-	}
-
-	const chars = bytes.map((byte) => {
-		if (byte === 9) {
-			return <span className='special-data-char'>\t</span>;
-		} else if (byte === 10) {
-			return <span className='special-data-char'>\n</span>;
-		} else if (byte === 13) {
-			return <span className='special-data-char'>\r</span>;
-		} else if (byte < 0x20) {
-			let char = byte.toString(16).toUpperCase();
-			if (char.length < 2)
-				char = `0${char}`;
-			return <span className='special-data-char'>\x{char}</span>;
-		} else {
-			return String.fromCharCode(byte);
-		}
-	});
-	return chars;
-};
 
 interface TraceStepProps {
 	traceDump: TTraceDump;
@@ -83,7 +54,7 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 		body = <div>
 			<div className="trace-step-data">
 				<span className="trace-step-data-column trace-step-data-column-value">
-					{decodeHex ? displayDecodedHex(step.d) : step.d}
+					{decodeHex ? renderDecodedHex(step.d) : step.d}
 				</span>
 				<span className="trace-step-data-column">
 					<small>{size} bytes,&nbsp;<TimeString value={step.tm} /></small>
@@ -100,7 +71,7 @@ const TraceStep: React.FC<TraceStepProps> = (props) => {
 			<div className="trace-step-data">
 				<span className="trace-step-data-column trace-step-data-column-value">
 					{packetStep && <>&nbsp;&nbsp;{
-						decodeHex ? displayDecodedHex(packetStep.d.slice(step.l * 2, step.o * 2)) : packetStep.d.slice(step.l * 2, step.o * 2)
+						decodeHex ? renderDecodedHex(packetStep.d.slice(step.l * 2, step.o * 2)) : packetStep.d.slice(step.l * 2, step.o * 2)
 					}</>}
 				</span>
 				<span className="trace-step-data-column">
