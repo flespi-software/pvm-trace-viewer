@@ -1,5 +1,6 @@
 .trace-packet-part {
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 .trace-packet-part:hover {
