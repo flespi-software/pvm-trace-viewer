@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, { ChangeEvent, useState } from 'react';
-import { Parser } from 'json2csv';
 import { getSourceCodeLine } from '../../lib/common';
 import { getDataSize, TTraceDump, TTraceFile, TTraceStepNewData, TTraceStepType } from '../../types';
 import SourceCodeView from '../SourceCodeView';
@@ -74,6 +73,18 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 		a.click();
 	};
 
+	const jsonRowsToCSV = (rows: Array<Array<any>>) => {
+		const lines = [];
+		for (const row of rows) {
+			const line = [];
+			for (const item of row) {
+				line.push(JSON.stringify(item));
+			}
+			lines.push(line.join(';'));
+		}
+		return lines.join('\n');
+	};
+
 	const doExportCSV = () => {
 		const csv = [
 			['type', 'size', 'hex', 'code'],
@@ -108,7 +119,7 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 		});
 
 		// convert to CSV text
-		const csvText = new Parser({ header: false, eol: '\n', delimiter: ';' }).parse(csv);
+		const csvText = jsonRowsToCSV(csv);
 
 		// and save file in the browser
 		saveTextFile(csvText, '.export.csv');

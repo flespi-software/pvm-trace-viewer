@@ -8,3 +8,9 @@
 	width: 50vw;
 	box-sizing: border-box;
 }
+
+@-moz-document url-prefix() {
+	.trace-dump-steps {
+		padding: 5px 15px 5px 5px;
+	}
+}

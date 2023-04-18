@@ -36,18 +36,18 @@ export const renderDecodedHex = (hex: string) => {
 		i += 2;
 	}
 
-	const chars = bytes.map((byte) => {
+	const chars = bytes.map((byte, index) => {
 		if (byte === 9) {
-			return <span className='special-data-char'>\t</span>;
+			return <span key={index} className='special-data-char'>\t</span>;
 		} else if (byte === 10) {
-			return <span className='special-data-char'>\n</span>;
+			return <span key={index} className='special-data-char'>\n</span>;
 		} else if (byte === 13) {
-			return <span className='special-data-char'>\r</span>;
+			return <span key={index} className='special-data-char'>\r</span>;
 		} else if (byte < 0x20) {
 			let char = byte.toString(16).toUpperCase();
 			if (char.length < 2)
 				char = `0${char}`;
-			return <span className='special-data-char'>\x{char}</span>;
+			return <span key={index} className='special-data-char'>\x{char}</span>;
 		} else {
 			return String.fromCharCode(byte);
 		}

@@ -26,3 +26,9 @@
 	box-sizing: border-box;
 	overflow-x: auto;
 }
+
+@-moz-document url-prefix() {
+	.trace-packet-hex {
+		padding-bottom: 15px;
+	}
+}
