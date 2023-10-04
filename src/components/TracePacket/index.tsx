@@ -24,6 +24,20 @@ const TracePacket: React.FC<TracePacketProps> = (props) => {
 
 	const packet = trace[packetIndex] as TTraceStepNewData;
 
+	// detect packet index and total packets count
+	let topLevelPacketIndex = 0;
+	let topLevelPacketsCount = 0;
+	// eslint-disable-next-line @typescript-eslint/prefer-for-of
+	for (let i = 0; i < trace.length; i++) {
+		const step = trace[i];
+		if (step.t === TTraceStepType.NewData) {
+			topLevelPacketsCount += 1;
+		}
+		if (i === packetIndex) {
+			topLevelPacketIndex = topLevelPacketsCount;
+		}
+	}
+
 	if (!packet) {
 		// searching first available packet
 		const first = nextPacketIndex(trace, -1);
@@ -69,6 +83,8 @@ const TracePacket: React.FC<TracePacketProps> = (props) => {
 				<div className="flex">
 					<button onClick={goNextPacket}>&gt;</button>
 				</div>
+				&nbsp;
+				({topLevelPacketIndex} / {topLevelPacketsCount})
 				<div className="flex trace-packet-pad">
 					Time:&nbsp;<TimeString value={packet.tm} />
 				</div>
