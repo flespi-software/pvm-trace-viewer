@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pvm-trace-viewer/static/css/main.954ed325.css",
-    "main.js": "/pvm-trace-viewer/static/js/main.33ed03c4.js",
+    "main.js": "/pvm-trace-viewer/static/js/main.df35c54d.js",
     "static/js/496.2966f02f.chunk.js": "/pvm-trace-viewer/static/js/496.2966f02f.chunk.js",
     "index.html": "/pvm-trace-viewer/index.html",
     "main.954ed325.css.map": "/pvm-trace-viewer/static/css/main.954ed325.css.map",
-    "main.33ed03c4.js.map": "/pvm-trace-viewer/static/js/main.33ed03c4.js.map",
+    "main.df35c54d.js.map": "/pvm-trace-viewer/static/js/main.df35c54d.js.map",
     "496.2966f02f.chunk.js.map": "/pvm-trace-viewer/static/js/496.2966f02f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.954ed325.css",
-    "static/js/main.33ed03c4.js"
+    "static/js/main.df35c54d.js"
   ]
 }
