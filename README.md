@@ -1,8 +1,8 @@
 # PVM trace dump viewer
 
-https://flespi-software.github.io/pvm-trace-viewer/
+<https://flespi-software.github.io/pvm-trace-viewer/>
 
-# How to upgrade and deploy
+## How to upgrade and deploy
 
 * edit source files on the main branch
 * commit source files changes on the `main` branch
