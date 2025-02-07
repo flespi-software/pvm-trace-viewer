@@ -9,10 +9,7 @@ const fileIndexToSourceName = (traceDump: TTraceDump, file: number): string | nu
 	const fileId = traceDump.files.find((fId) => fId[0] === file);
 	if (!fileId)
 		return null;
-	const fileName = fileId[1];
-	if (fileName === traceDump.bytecode_name)
-		return 'main';
-	return fileName;
+	return fileId[1];
 };
 
 export const getSourceCodeLine = (traceDump: TTraceDump, file: number, lineNum: number) => {

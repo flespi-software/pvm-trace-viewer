@@ -11,7 +11,8 @@ interface SourceCodeViewProps {
 const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 	const { traceDump, stepIndex } = props;
 	const step = traceDump.trace[stepIndex];
-	const fileLines = traceDump.sourceLines?.main; // NOTE: hardcoded "main" source code file
+	const mainFile = traceDump.source?.mainfile;
+	const fileLines = traceDump.sourceLines && mainFile && traceDump.sourceLines[mainFile];
 
 	if (!fileLines)
 		return <div>no source code available</div>;

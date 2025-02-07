@@ -21,9 +21,10 @@ const TraceDumpSelector: React.FC<TraceDumpSelectorProps> = (props) => {
 					const traceDump: TTraceDump = JSON.parse(fileJson);
 					if (traceDump.source) {
 						traceDump.sourceLines = {};
-						for (let key of Object.keys(traceDump.source)) {
-							const lines = traceDump.source[key].split('\n');
-							traceDump.sourceLines[key] = lines;
+						for (let fname of Object.keys(traceDump.source.files)) {
+							const code = traceDump.source.files[fname];
+							const lines = code.split('\n');
+							traceDump.sourceLines[fname] = lines;
 						}
 					}
 					props.setTraceDump(traceDump);

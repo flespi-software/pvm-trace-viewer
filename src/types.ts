@@ -64,9 +64,13 @@ export type TCodeFileId = [number, string];		// file id, file name
 
 export type TVariableId = [number, string];		// variable id, variable name
 
+export interface TSourceCodeFiles {
+	[filename: string]: string;
+}
+
 export interface TSourceCode {
-	main: string;
-	[key: string]: string;
+	mainfile: string;
+	files: TSourceCodeFiles;
 }
 
 export interface TSourceCodeLines {
