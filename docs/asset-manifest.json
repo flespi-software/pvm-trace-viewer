@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pvm-trace-viewer/static/css/main.954ed325.css",
-    "main.js": "/pvm-trace-viewer/static/js/main.c9ed2de9.js",
-    "static/js/496.2966f02f.chunk.js": "/pvm-trace-viewer/static/js/496.2966f02f.chunk.js",
+    "main.css": "/pvm-trace-viewer/static/css/main.b188aecc.css",
+    "main.js": "/pvm-trace-viewer/static/js/main.351d2de6.js",
+    "static/js/496.34c90e5e.chunk.js": "/pvm-trace-viewer/static/js/496.34c90e5e.chunk.js",
     "index.html": "/pvm-trace-viewer/index.html",
-    "main.954ed325.css.map": "/pvm-trace-viewer/static/css/main.954ed325.css.map",
-    "main.c9ed2de9.js.map": "/pvm-trace-viewer/static/js/main.c9ed2de9.js.map",
-    "496.2966f02f.chunk.js.map": "/pvm-trace-viewer/static/js/496.2966f02f.chunk.js.map"
+    "main.b188aecc.css.map": "/pvm-trace-viewer/static/css/main.b188aecc.css.map",
+    "main.351d2de6.js.map": "/pvm-trace-viewer/static/js/main.351d2de6.js.map",
+    "496.34c90e5e.chunk.js.map": "/pvm-trace-viewer/static/js/496.34c90e5e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.954ed325.css",
-    "static/js/main.c9ed2de9.js"
+    "static/css/main.b188aecc.css",
+    "static/js/main.351d2de6.js"
   ]
 }
