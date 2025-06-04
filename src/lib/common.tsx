@@ -51,3 +51,16 @@ export const renderDecodedHex = (hex: string) => {
 	});
 	return chars;
 };
+
+export const getFileName = (traceDump: TTraceDump, stepIndex: number) => {
+	const step = traceDump.trace[stepIndex];
+	const fileIndex = step.c[0];
+	let fileName;
+	for (let f of traceDump.files) {
+		if (f[0] === fileIndex) {
+			fileName = f[1];
+			break;
+		}
+	}
+	return fileName;
+};

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { ChangeEvent, useState } from 'react';
 import { getSourceCodeLine } from '../../lib/common';
 import { getDataSize, TTraceDump, TTraceFile, TTraceStepNewData, TTraceStepType } from '../../types';
+import SourceCodeFile from '../SourceCodeFile';
 import SourceCodeView from '../SourceCodeView';
 import TraceDumpSteps from '../TraceDumpSteps';
 import TracePacket from '../TracePacket';
@@ -183,6 +184,10 @@ const TraceDumpViewer: React.FC<TraceDumpViewerProps> = (props) => {
 				<button onClick={doExportCSV}>Export to CSV</button>
 				&nbsp;
 				<button onClick={doExportTXT}>Export to TXT</button>
+				&nbsp;
+				<div className="trace-view-settings-tail">
+					<SourceCodeFile traceDump={traceDump} stepIndex={stepIndex} />
+				</div>
 			</div>
 			<div className="trace-dump-details">
 				<TraceDumpSteps traceDump={traceDump} stepIndex={stepIndex} setStepIndex={setStep} showAllSteps={showAllSteps} decodeHex={decodeHex} />
