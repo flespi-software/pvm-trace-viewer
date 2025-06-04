@@ -1,5 +1,5 @@
 import React from 'react';
-import { scrollTo } from '../../lib/common';
+import { getFileName, scrollTo } from '../../lib/common';
 import { TTraceDump } from '../../types';
 import './style.css';
 
@@ -11,8 +11,8 @@ interface SourceCodeViewProps {
 const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 	const { traceDump, stepIndex } = props;
 	const step = traceDump.trace[stepIndex];
-	const mainFile = traceDump.source?.mainfile;
-	const fileLines = traceDump.sourceLines && mainFile && traceDump.sourceLines[mainFile];
+	const fileName = getFileName(traceDump, stepIndex);
+	const fileLines = traceDump.sourceLines && fileName && traceDump.sourceLines[fileName];
 
 	if (!fileLines)
 		return <div>no source code available</div>;
@@ -25,7 +25,7 @@ const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 			viewLine = line;
 
 		return <pre
-			key={index}
+			key={fileName + '-' + index.toString()}
 			ref={index === (step.c[1] - 1) ? scrollTo : undefined}
 			className={index === (step.c[1] - 1) ? 'source-code-line source-code-line-selected': 'source-code-line'}>{viewLine}</pre>;
 	});
