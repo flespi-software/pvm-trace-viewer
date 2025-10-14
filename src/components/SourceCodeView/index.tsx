@@ -13,6 +13,7 @@ const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 	const step = traceDump.trace[stepIndex];
 	const fileName = getFileName(traceDump, stepIndex);
 	const fileLines = traceDump.sourceLines && fileName && traceDump.sourceLines[fileName];
+	const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
 
 	if (!fileLines)
 		return <div>no source code available</div>;
@@ -20,7 +21,7 @@ const SourceCodeView: React.FC<SourceCodeViewProps> = (props) => {
 	const lines = fileLines.map((line, index) => {
 		let viewLine;
 		if (line === '')
-			viewLine = <br />;
+			viewLine = isFirefox ? '' : <br />;
 		else
 			viewLine = line;
 
