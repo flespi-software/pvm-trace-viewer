@@ -20,6 +20,10 @@
 	margin-right: 5px;
 }
 
+.trace-op {
+	margin-right: 5px;
+}
+
 .trace-step-error {
 	overflow: auto;
 }
