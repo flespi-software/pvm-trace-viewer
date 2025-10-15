@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pvm-trace-viewer/static/css/main.16ee5a9e.css",
-    "main.js": "/pvm-trace-viewer/static/js/main.10a24000.js",
+    "main.css": "/pvm-trace-viewer/static/css/main.6d6621e7.css",
+    "main.js": "/pvm-trace-viewer/static/js/main.a4dc8a14.js",
     "static/js/496.34c90e5e.chunk.js": "/pvm-trace-viewer/static/js/496.34c90e5e.chunk.js",
     "index.html": "/pvm-trace-viewer/index.html",
-    "main.16ee5a9e.css.map": "/pvm-trace-viewer/static/css/main.16ee5a9e.css.map",
-    "main.10a24000.js.map": "/pvm-trace-viewer/static/js/main.10a24000.js.map",
+    "main.6d6621e7.css.map": "/pvm-trace-viewer/static/css/main.6d6621e7.css.map",
+    "main.a4dc8a14.js.map": "/pvm-trace-viewer/static/js/main.a4dc8a14.js.map",
     "496.34c90e5e.chunk.js.map": "/pvm-trace-viewer/static/js/496.34c90e5e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.16ee5a9e.css",
-    "static/js/main.10a24000.js"
+    "static/css/main.6d6621e7.css",
+    "static/js/main.a4dc8a14.js"
   ]
 }
